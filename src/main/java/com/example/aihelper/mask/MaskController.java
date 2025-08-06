@@ -1,6 +1,7 @@
 package com.example.aihelper.mask;
 
 import com.example.aihelper.message.ChatMessage;
+import com.example.aihelper.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class MaskController {
     private MaskRepository maskRepository;
 
     @PostMapping(path="/add_all") // Map ONLY POST Requests
-    public @ResponseBody String addAllMasks (@RequestBody List<Mask> maskList) {
+    public @ResponseBody ResponseResult<String> addAllMasks (@RequestBody List<Mask> maskList) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         for (Mask mask : maskList) {
@@ -25,12 +26,12 @@ public class MaskController {
             }
         }
         maskRepository.saveAll(maskList);
-        return "Saved";
+        return ResponseResult.success("saved");
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<Mask> getAllMasks() {
+    public @ResponseBody ResponseResult<Iterable<Mask>> getAllMasks() {
         // This returns a JSON or XML with the users
-        return maskRepository.findAll();
+        return ResponseResult.success(maskRepository.findAll());
     }
 }

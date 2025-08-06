@@ -3,6 +3,7 @@ package com.example.aihelper.session;
 
 import com.example.aihelper.message.ChatMessage;
 import com.example.aihelper.message.ChatMessageRepository;
+import com.example.aihelper.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,34 +20,34 @@ public class ChatSessionController {
     private ChatMessageRepository messageRepository;
 
     @PostMapping(path="/add") // Map ONLY POST Requests
-    public @ResponseBody String addSession (@RequestBody ChatSession session) {
+    public @ResponseBody ResponseResult<String> addSession (@RequestBody ChatSession session) {
         // @ResponseBody means the rgeeturned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         sessionRepository.save(session);
-        return "Saved";
+        return ResponseResult.success("Saved");
     }
 
     @PostMapping(path="/message/add") // Map ONLY POST Requests
-    public @ResponseBody String addMessage (@RequestParam String sessionId, @RequestBody ChatMessage message) {
+    public @ResponseBody ResponseResult<String> addMessage (@RequestParam String sessionId, @RequestBody ChatMessage message) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         ChatSession session = sessionRepository.findById(sessionId).get();
         message.setSession(session);
         messageRepository.save(message);
-        return "Saved";
+        return ResponseResult.success("Saved");
     }
 
     @PostMapping(path="/delete") // Map ONLY POST Requests
-    public @ResponseBody String deleteSession (@RequestParam String sessionId) {
+    public @ResponseBody ResponseResult<String> deleteSession (@RequestParam String sessionId) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         sessionRepository.deleteById(sessionId);
-        return "Deleted";
+        return ResponseResult.success("Deleted");
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<ChatSession> getAllSessions() {
+    public @ResponseBody ResponseResult<Iterable<ChatSession>> getAllSessions() {
         // This returns a JSON or XML with the users
-        return sessionRepository.findAll();
+        return ResponseResult.success(sessionRepository.findAll());
     }
 }

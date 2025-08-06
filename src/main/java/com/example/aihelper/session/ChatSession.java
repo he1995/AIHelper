@@ -1,5 +1,7 @@
-package com.example.aihelper.entity;
+package com.example.aihelper.session;
 
+import com.example.aihelper.mask.Mask;
+import com.example.aihelper.message.ChatMessage;
 import jakarta.persistence.*;
 
 import java.util.List;

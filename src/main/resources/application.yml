@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: AIHelper
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/ai_helper
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

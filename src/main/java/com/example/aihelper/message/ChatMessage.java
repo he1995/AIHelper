@@ -1,5 +1,7 @@
-package com.example.aihelper.entity;
+package com.example.aihelper.message;
 
+import com.example.aihelper.session.ChatSession;
+import com.example.aihelper.mask.Mask;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 

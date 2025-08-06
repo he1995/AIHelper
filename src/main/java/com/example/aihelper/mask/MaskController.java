@@ -1,8 +1,6 @@
-package com.example.aihelper.controller;
+package com.example.aihelper.mask;
 
-import com.example.aihelper.entity.ChatMessage;
-import com.example.aihelper.entity.Mask;
-import com.example.aihelper.repository.MaskRepository;
+import com.example.aihelper.message.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

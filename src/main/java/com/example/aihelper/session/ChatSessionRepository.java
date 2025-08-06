@@ -1,6 +1,5 @@
-package com.example.aihelper.repository;
+package com.example.aihelper.session;
 
-import com.example.aihelper.entity.ChatSession;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ChatSessionRepository extends CrudRepository<ChatSession, String> {

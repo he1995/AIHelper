@@ -1,10 +1,8 @@
-package com.example.aihelper.controller;
+package com.example.aihelper.session;
 
 
-import com.example.aihelper.entity.ChatMessage;
-import com.example.aihelper.entity.ChatSession;
-import com.example.aihelper.repository.ChatMessageRepository;
-import com.example.aihelper.repository.ChatSessionRepository;
+import com.example.aihelper.message.ChatMessage;
+import com.example.aihelper.message.ChatMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

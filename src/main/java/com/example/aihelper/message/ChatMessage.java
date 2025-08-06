@@ -4,8 +4,10 @@ import com.example.aihelper.session.ChatSession;
 import com.example.aihelper.mask.Mask;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class ChatMessage {
     @Id
     private String id;
@@ -26,52 +28,4 @@ public class ChatMessage {
     @JoinColumn(name = "session_id")
     @JsonIgnore
     private ChatSession session;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String data) {
-        this.date = data;
-    }
-
-    public Mask getMask() {
-        return mask;
-    }
-
-    public void setMask(Mask mask) {
-        this.mask = mask;
-    }
-
-    public ChatSession getSession() {
-        return session;
-    }
-
-    public void setSession(ChatSession session) {
-        this.session = session;
-    }
 }

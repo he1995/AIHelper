@@ -1,69 +1,62 @@
-spring:
-  application:
-    name: AIHelper
+server:
+  port: 8081
 
+spring:
   data:
+    # redis配置
     redis:
-      database: 0
+      # Redis数据库索引（默认为0）
+      database: 1
+      # Redis服务器地址
       host: 127.0.0.1
+      # Redis服务器连接端口
       port: 6379
+      # Redis服务器连接密码（默认为空）
+      # password:
+      # 连接超时时间
+      timeout: 10s
       lettuce:
         pool:
-          min-idle: 0
-          max-active: 8
-          max-idle: 8
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
           max-wait: -1ms
-      connect-timeout: 30000ms
-
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 0
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/ai_helper
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding.yaml
 
     druid:
-      # 初始化大小
       initial-size: 5
-      # 最小连接数
       min-idle: 10
-      # 最大连接数
       max-active: 20
-      # 获取连接时的最大等待时间
-      max-wait: 60000
-      # 一个连接在池中最小生存的时间，单位是毫秒
-      min-evictable-idle-time-millis: 300000
-      # 多久才进行一次检测需要关闭的空闲连接，单位是毫秒
-      time-between-eviction-runs-millis: 60000
-      # 配置扩展插件：stat-监控统计，log4j-日志，wall-防火墙（防止SQL注入），去掉后，监控界面的sql无法统计
-      filters: stat,wall
-      # 检测连接是否有效的 SQL语句，为空时以下三个配置均无效
       validation-query: SELECT 1
-      # 申请连接时执行validationQuery检测连接是否有效，默认true，开启后会降低性能
-      test-on-borrow: true
-      # 归还连接时执行validationQuery检测连接是否有效，默认false，开启后会降低性能
-      test-on-return: true
-      # 申请连接时如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效，默认false，建议开启，不影响性能
-      test-while-idle: true
-      # 是否开启 StatViewServlet
+      filters: config,stat,slf4j
+      # 统计 SQL 执行情况
+      stat:
+        merge-sql: true
+        log-slow-sql: true
+        slow-sql-millis: 5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        #不统计这些请求数据
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+
+      #访问监控网页的登录用户名和密码
       stat-view-servlet:
         enabled: true
-        # 访问监控页面 白名单，默认127.0.0.1
-        allow: 127.0.0.1
+        url-pattern: /druid/*
         login-username: admin
         login-password: admin
-      # FilterStat
-      filter:
-        stat:
-          # 是否开启 FilterStat，默认true
-          enabled: true
-          # 是否开启 慢SQL 记录，默认false
-          log-slow-sql: true
-          # 慢 SQL 的标准，默认 3000，单位：毫秒
-          slow-sql-millis: 5000
-          # 合并多个连接池的监控数据，默认false
-          merge-sql: false
 
   jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+    show-sql: true # 默认false，在日志里显示执行的sql语句
+    database: mysql
+    database-platform: mysql
+    hibernate.ddl-auto: update #指定为update，每次启动项目检测表结构有变化的时候会新增字段，表不存在时会新建，如果指定create，则每次启动项目都会清空数据并删除表，再新建
+    properties.hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    generate-ddl: false

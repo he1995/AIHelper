@@ -1,1 +1,5 @@
 rootProject.name = 'AIHelper'
+
+include "mask"
+include "session"
+include "common"

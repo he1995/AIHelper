@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: goods
+
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding.yaml
+
+  jpa:
+    show-sql: true
+    database: mysql
+    database-platform: mysql
+    hibernate.ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    generate-ddl: false
+
+server:
+  port: 8084

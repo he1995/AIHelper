@@ -1,12 +1,11 @@
-package com.example.session;
+package com.example.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SessionApplication {
-
+public class UserApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SessionApplication.class, args);
+        SpringApplication.run(UserApplication.class, args);
     }
 }

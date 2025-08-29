@@ -1,4 +1,4 @@
-package com.example.session;
+package com.example.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.example.session;
+package com.example.common.utils;
 
 import lombok.Builder;
 import lombok.Data;

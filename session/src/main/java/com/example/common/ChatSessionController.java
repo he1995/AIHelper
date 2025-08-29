@@ -1,5 +1,8 @@
-package com.example.session;
+package com.example.common;
 
+import com.example.common.entity.ChatMessage;
+import com.example.common.entity.ChatSession;
+import com.example.common.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

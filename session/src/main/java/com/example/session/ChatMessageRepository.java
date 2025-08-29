@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.session;
 
 import com.example.common.entity.ChatMessage;
 import org.springframework.data.repository.CrudRepository;

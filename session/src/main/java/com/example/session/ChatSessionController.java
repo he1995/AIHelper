@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.session;
 
 import com.example.common.entity.ChatMessage;
 import com.example.common.entity.ChatSession;

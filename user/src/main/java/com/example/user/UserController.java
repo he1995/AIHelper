@@ -1,6 +1,7 @@
 package com.example.user;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.example.common.constants.Constants;
 import com.example.common.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,6 +27,7 @@ public class UserController {
         User user = userService.findUserByUsername(loginRequest.username());
         if (user != null && user.getPassword().equals(loginRequest.password())) {
             StpUtil.login(user);
+            redisTemplate.opsForValue().set(Constants.USER_ID, user.getId());
             return ResponseResult.success(new LoginResponse(StpUtil.getTokenInfo(), user));
         }
         return ResponseResult.fail(null, "login fail");

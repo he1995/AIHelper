@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':common')
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'com.alibaba:druid-spring-boot-3-starter:1.2.24'
+}
